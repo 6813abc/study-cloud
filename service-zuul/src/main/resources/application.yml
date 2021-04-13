@@ -1,18 +1,20 @@
-eureka:
-  client:
-    serviceUrl:
-      defaultZone:  http://localhost:8761/eureka/
 server:
   port: 8769
 spring:
   application:
     name: service-zuul
+  rabbitmq:
+    host: ${RABBIT_MQ_HOST:192.168.99.100}
+    port: ${RABBIT_MQ_PORT:5672}
+    username: ${RABBIT_MQ_USERNAME:guest}
+    password: ${RABBIT_MQ_PASSWORD:guest}
+  main:
+    allow-bean-definition-overriding: true
 zuul:
   routes:
-    api-a:
-      path: /api-provider/**
-      service-id: provider-demo
-#http://127.0.0.1:8769/api-consumer/consumer/getInterfaceInfo
-    api-b:
-      path: /api-consumer/**
-      service-id: consumer-demo
+    producer:
+      path: /producer/**
+      service-id: producer
+    consumer:
+      path: /consumer/**
+      service-id: consumer

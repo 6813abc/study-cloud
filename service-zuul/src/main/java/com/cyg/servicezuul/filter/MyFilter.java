@@ -1,12 +1,9 @@
 package com.cyg.servicezuul.filter;
 
 import com.netflix.zuul.ZuulFilter;
-import com.netflix.zuul.context.RequestContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author cyg
@@ -17,45 +14,41 @@ public class MyFilter extends ZuulFilter {
 
     private static final Logger log = LoggerFactory.getLogger(MyFilter.class);
 
+    /**
+     * 过滤器的类型 pre route post error
+     **/
     @Override
     public String filterType() {
         return "pre";
     }
 
+    /**
+     * 执行顺序，返回值越小，优先级越高
+     **/
     @Override
     public int filterOrder() {
         return 0;
     }
 
+    /**
+     * 是否执行该过滤器
+     */
     @Override
     public boolean shouldFilter() {
         return true;
     }
 
+
     /**
      * 功能描述: <br>
-     * 〈简单的拦截器〉
+     * 〈过滤器通过后的操作〉
      *
      * @author cyg
      * @date 2021/1/28 11:22
      */
     @Override
     public Object run() {
-        RequestContext ctx = RequestContext.getCurrentContext();
-        HttpServletRequest request = ctx.getRequest();
-        log.info(String.format("%s >>> %s", request.getMethod(), request.getRequestURL().toString()));
-        Object accessToken = request.getParameter("token");
-        if (accessToken != null) {
-            return null;
-        }
-        log.warn("token is empty");
-        ctx.setSendZuulResponse(false);
-        ctx.setResponseStatusCode(401);
-        try {
-            ctx.getResponse().getWriter().write("token is empty");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        log.info("通过过滤器");
         return null;
     }
 }
