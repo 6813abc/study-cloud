@@ -31,6 +31,7 @@ public class UserHystrixController {
     @GetMapping("/testRemoveCache/{id}")
     public String testRemoveCache(@PathVariable int id) {
         userService.getUserCache(id);
+        //移除缓存
         userService.removeCache(id);
         userService.getUserCache(id);
         return "移除缓存操作成功";
