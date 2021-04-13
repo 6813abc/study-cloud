@@ -1,5 +1,11 @@
 server:
   port: 8761
+spring:
+  rabbitmq:
+    host: ${RABBIT_MQ_HOST:192.168.99.100}
+    port: ${RABBIT_MQ_PORT:5672}
+    username: ${RABBIT_MQ_USERNAME:guest}
+    password: ${RABBIT_MQ_PASSWORD:guest}
 eureka:
   client:
     register-with-eureka: false
