@@ -12,7 +12,8 @@ public class ProviderController {
 
 
     @RequestMapping("/provider/demo")
-    public String providerDemo() {
-        return "ProviderDemo";
+    public String providerDemo(int index) {
+        System.out.println("收到消息" + index);
+        return "收到消息";
     }
 }
