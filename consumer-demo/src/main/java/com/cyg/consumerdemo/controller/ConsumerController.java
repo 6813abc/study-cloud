@@ -59,12 +59,21 @@ public class ConsumerController {
         return "测试断路器，默认返回";
     }
 
-
     /**
      * 为缓存生成key的方法
      */
     public String getCacheKey(int value) {
         return String.valueOf(value);
+    }
+
+    @RequestMapping("/order")
+    public String order() {
+        return this.restTemplate.getForObject("http://producer/provider/order?", String.class);
+    }
+
+    @RequestMapping("/setOrderNum")
+    public String order(int num) {
+        return this.restTemplate.getForObject("http://producer/provider/setOrderNum?num={1}", String.class, num);
     }
 }
 
