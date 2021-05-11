@@ -1,5 +1,5 @@
 server:
-  port: 7903
+  port: 7904
 spring:
   application:
     name: producer
@@ -8,3 +8,4 @@ spring:
     port: ${RABBIT_MQ_PORT:5672}
     username: ${RABBIT_MQ_USERNAME:guest}
     password: ${RABBIT_MQ_PASSWORD:guest}
+
